@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>WORDLE WORD OPTIONS</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="icon" href="./assets/mono-w.png">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-xl sticky-top navbar-dark bg-dark nav-container">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="./assets/mono-w.png" alt="" class="d-inline-block icon">
+        <h1 class="h1-on-nav">
+          WORDLE HELPER - You got options!
+        </h1>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Legal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="word-entry-container">
+    <!-- to be populated by javascript -->
+  </div>
+
+  <div id="instruction-panel"> <!-- to be populated by javascript --> </div>
+
+  <div id="submit-panel">
+    <div class="text-center">
+      <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="bottom" data-delay=10 title="Complete a word to enter next word.">
+        <button type="button" class="btn btn-secondary btn-lg btn-light submit-btn" id="next-word">Next Word</button>
+      </span>
+      <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="bottom" data-delay=10 title="Complete a word to enter next word.">
+        <button type="button" class="btn btn-secondary btn-lg btn-light submit-btn" id="reset-button">Reset</button>
+      </span>
+      <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="bottom" data-delay=10 title="Complete a word to get option possibilities.">
+        <button type="button" class="btn btn-secondary btn-lg btn-light submit-btn" id="get-options">Get Options</button>
+      </span>
+    </div>
+  </div>
+
+<div class="text-center">
+  <div class="jumbotron bg-light text-dark" id="answers-panel">
+    <h3 class="display-4" id="heading-jumbotron">
+      <!-- to be populated by javascript -->
+    </h3>
+    <div class="container border">
+      <div class="row" id="all-answers">
+      </div>
+    </div>
+    <br />
+    <a class="btn btn-dark btn-lg" href="#" role="button" id="dismiss-answers-panel">Dismiss and Continue</a>
+  </div>
+</div>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script charset="utf-8" src="./scripts/wordle_guess_list.js"></script>
+  <script charset="utf-8" src="./scripts/core.js"></script>
+  <script charset="utf-8" src="./scripts/index.js"></script>
+</body>
+
+</html>
