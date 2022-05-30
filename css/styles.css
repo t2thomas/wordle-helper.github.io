@@ -23,11 +23,6 @@ kbd {
   color: black;
 }
 
-.h1-on-nav {
-  vertical-align: middle;
-  display: inline-block;
-}
-
 .icon {
   height: 100px;
   vertical-align: middle;
@@ -90,12 +85,10 @@ kbd {
 
 #instruction-panel {
   text-align: center;
-  border: 1px solid white;
-  border-radius: 5px;
   color: gainsboro;
   padding-left: 0;
   padding-right: 0;
-  margin: 2rem 30% 0 30%;
+  margin: 1rem 5% 0 5%;
 }
 
 #keyboard-container{
