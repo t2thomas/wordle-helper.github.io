@@ -22,19 +22,19 @@ window.addEventListener('keydown', function(event) {
   handleKeystroke(event.key);
 });
 
-document.getElementById("next-word").onclick = function () {
+document.getElementById("next-word").onclick = function() {
   getNextWord();
 };
 
-document.getElementById("reset-button").onclick = function () {
+document.getElementById("reset-button").onclick = function() {
   resetAll();
 };
 
-document.getElementById("get-options").onclick = function () {
+document.getElementById("get-options").onclick = function() {
   getAllOptions();
 };
 
-document.getElementById("dismiss-answers-panel").onclick = function () {
+document.getElementById("dismiss-answers-panel").onclick = function() {
   dismissAnswersPanel();
 };
 
@@ -56,40 +56,47 @@ function isLetter(char) {
 
 function handleKeystroke(char) {
   /* This function is called by physical keyboard or virtual keyboard on a laptop, but by virtual keyboard on a mobile device */
-  if ( isLetter(char) && (!endOfLineWaitingConfirmation) && (currentId<numCols*numRows) ) {
-    char = char.toUpperCase();
-    document.getElementById(currentId.toString()).innerText = char;
-    removeCurrentCell(currentId);
+  if (isLetter(char) && (currentId < numCols * numRows)) {
+    if (!endOfLineWaitingConfirmation) {
+      /* User entered a character and */
+      char = char.toUpperCase();
+      document.getElementById(currentId.toString()).innerText = char;
+      removeCurrentCell(currentId);
 
-    currentId += 1;
+      currentId += 1; /* internal pointer moved to next cell (not on screen until the following operations are completed) */
 
-    if ((currentId % numCols == 0) && (currentId != 0)) {
-      endOfLineWaitingConfirmation = true;
-      document.getElementById('instruction-panel').innerHTML = awaitingConfirmationInstruction;
-      document.getElementById('instruction-panel').classList.add('apply-shake');
-      document.getElementById('next-word').disabled = false;
-      document.getElementById('get-options').disabled = false;
+      if ((currentId % numCols == 0) && (currentId != 0)) {
+        /*Arrive here if you were entering words, but the last letter they entered reached the end of the line.
+        We will force you to confirm before going to next word or all options */
+        endOfLineWaitingConfirmation = true;
+        document.getElementById('instruction-panel').innerHTML = awaitingConfirmationInstruction;
+        document.getElementById('instruction-panel').classList.add('apply-shake'); /*emphasize  you need to  confirm completion of word*/
+        document.getElementById('next-word').disabled = false;
+        document.getElementById('get-options').disabled = false;
+      } else {
+        /* move to next position since user is not at end of row */
+        selectCurrentCell(currentId);
+      }
     } else {
-      selectCurrentCell(currentId);
+      /* User  is at end of the line, but continues to  enter characters, so we re-emphasize to confirm */
+      document.getElementById('instruction-panel').innerHTML = awaitingConfirmationInstruction;
+      document.getElementById('instruction-panel').classList.add('apply-shake'); /*emphasize  you need to  confirm completion of word*/
     };
 
-  }
-  else if (char == "Enter")  {
+  } else if (char == "Enter") {
     getNextWord();
-  }
-  else if ((char == "Backspace") && (currentId!= 0)){
-    if(endOfLineWaitingConfirmation){
+  } else if ((char == "Backspace") && (currentId != 0)) {
+    if (endOfLineWaitingConfirmation) {
       endOfLineWaitingConfirmation = false;
       document.getElementById('instruction-panel').innerHTML = restingInstruction;
       document.getElementById('next-word').disabled = true;
       document.getElementById('get-options').disabled = true;
-    }
-    else{
+    } else {
       removeCurrentCell(currentId);
     }
-    currentId-=1;
+    currentId -= 1;
     document.getElementById(currentId.toString()).innerText = "";
-    document.getElementById(currentId.toString()).classList.remove('word-cell-state1','word-cell-state2');
+    document.getElementById(currentId.toString()).classList.remove('word-cell-state1', 'word-cell-state2');
     document.getElementById(currentId.toString()).classList.add('word-cell-state0');
     selectCurrentCell(currentId);
   };
@@ -119,16 +126,14 @@ function makeCells(numRows, numCols, container) {
   };
 };
 
-function getBoxState(boxObject){
+function getBoxState(boxObject) {
   var classes = boxObject.classList;
-  if( classes.contains('word-cell-state0') ){
-    return(0);
-  }
-  else if(classes.contains('word-cell-state1')){
-    return(1);
-  }
-  else if(classes.contains('word-cell-state2')){
-    return(2);
+  if (classes.contains('word-cell-state0')) {
+    return (0);
+  } else if (classes.contains('word-cell-state1')) {
+    return (1);
+  } else if (classes.contains('word-cell-state2')) {
+    return (2);
   }
 }
 
@@ -147,27 +152,27 @@ function cellStateOnClick(box) {
   };
 };
 
-function dismissAnswersPanel(){
-  document.getElementById('answers-panel').style.display="none";
+function dismissAnswersPanel() {
+  document.getElementById('answers-panel').style.display = "none";
   //document.getElementById('answers-panel').classList.remove('visible');
   //document.getElementById('answers-panel').classList.add('invisible');
 }
 
-function getNextWord(){
-  if(endOfLineWaitingConfirmation && (currentId < numCols*numRows)){
+function getNextWord() {
+
+  if (endOfLineWaitingConfirmation && (currentId < numCols * numRows)) {
     endOfLineWaitingConfirmation = false;
     document.getElementById('instruction-panel').innerHTML = restingInstruction;
 
     document.getElementById('next-word').disabled = true;
     document.getElementById('get-options').disabled = true;
     selectCurrentCell(currentId);
-  }
-  else{
+  } else {
     document.getElementById('instruction-panel').classList.add('apply-shake');
   }
 };
 
-function resetAll(){
+function resetAll() {
   endOfLineWaitingConfirmation = false;
   document.getElementById('instruction-panel').innerHTML = restingInstruction;
 
@@ -175,9 +180,9 @@ function resetAll(){
 
   for (var i = 0; i < numRows; i++) {
     for (var j = 0; j < numCols; j++) {
-      document.getElementById((i*numCols + j).toString()).innerText = "";
-      document.getElementById((i*numCols + j).toString()).classList.remove('word-cell-state1','word-cell-state2','word-cell-selected');
-      document.getElementById((i*numCols + j).toString()).classList.add('word-cell-state0');
+      document.getElementById((i * numCols + j).toString()).innerText = "";
+      document.getElementById((i * numCols + j).toString()).classList.remove('word-cell-state1', 'word-cell-state2', 'word-cell-selected');
+      document.getElementById((i * numCols + j).toString()).classList.add('word-cell-state0');
     }
   }
 
@@ -189,68 +194,66 @@ function resetAll(){
 }
 
 function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
 }
 
-function getAllWordsFromInnerHTML(){
+function getAllWordsFromInnerHTML() {
   var words = [];
   var i = 0;
   var j = 0;
   var currentWord = "";
 
-  while( i*numCols + j < currentId ){
-    var one_char = document.getElementById( (i*numCols + j).toString() ).innerText;
+  while (i * numCols + j < currentId) {
+    var one_char = document.getElementById((i * numCols + j).toString()).innerText;
 
     //console.log( currentId, i*numCols + j, i, j, one_char);
     currentWord = currentWord.concat(one_char);
-    if(currentWord.length == numCols){
-      words.push( currentWord );
+    if (currentWord.length == numCols) {
+      words.push(currentWord);
       //console.log( currentWord );
       currentWord = "";
       j++;
     }
-    if(j<numCols){
+    if (j < numCols) {
       j++;
-    }
-    else{
+    } else {
       i++;
-      j=0;
+      j = 0;
     }
   }
-  return(words);
+  return (words);
 }
 
-function getAllCluesFromInnerHTML(){
+function getAllCluesFromInnerHTML() {
   var clues = [];
   var i = 0;
   var j = 0;
   var currentWordStates = [];
 
-  while( i*numCols + j < currentId ){
-    var one_state = getBoxState( document.getElementById( (i*numCols + j).toString() ) );
+  while (i * numCols + j < currentId) {
+    var one_state = getBoxState(document.getElementById((i * numCols + j).toString()));
 
     //console.log( currentId, i*numCols + j, i, j, one_state);
     currentWordStates.push(one_state);
-    if(currentWordStates.length == numCols){
-      clues.push( currentWordStates );
+    if (currentWordStates.length == numCols) {
+      clues.push(currentWordStates);
       //console.log( currentWordStates );
       currentWordStates = [];
       j++;
     }
-    if(j<numCols){
+    if (j < numCols) {
       j++;
-    }
-    else{
+    } else {
       i++;
-      j=0;
+      j = 0;
     }
   }
-  return(clues);
+  return (clues);
 }
 
-function getAllOptions(){
+function getAllOptions() {
   getNextWord();
 
   allWords = getAllWordsFromInnerHTML();
@@ -258,7 +261,7 @@ function getAllOptions(){
   //console.log(allWords, allClues);
   //bankOfWords = getAllPossibleAnswersFromFile();
   bankOfWords = wordGuessPool;
-  bankOfWords = filterAll( bankOfWords, allWords, allClues);
+  bankOfWords = filterAll(bankOfWords, allWords, allClues);
   //bankOfWords = allWords;
   //bankOfWords = ['SNUCK','PRICK','SASSY','SWEAR','PLIER','CLAVE','SNACK','STOCK','BREAD','FRANK','LEGGY','TONKS','WRECK'];
 
@@ -268,7 +271,7 @@ function getAllOptions(){
 
   for (var i = 0; i < bankOfWords.length; i++) {
     let thisDiv = document.createElement("div");
-    thisDiv.classList.add("col-2","border","text-center","single-word");
+    thisDiv.classList.add("col-2", "border", "text-center", "single-word");
     thisDiv.innerText = " " + bankOfWords[i] + " ";
     ansContainer.appendChild(thisDiv);
   }
