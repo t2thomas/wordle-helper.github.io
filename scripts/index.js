@@ -5,7 +5,7 @@ let numRows = 6;
 let numCols = 5;
 let answerFileLocation = "../assets/wordle_answer_list_sorted.txt";
 
-let restingInstruction = "Complete atleast one word to be able to get your options. Tap on letters to change colors. "
+let restingInstruction = "Complete atleast one word to be able to get your available options. Tap on letters to change colors to indicate the clues given by Wordle. "
 let awaitingConfirmationInstruction = "Tap on letters to change colors. Click on 'Next word' or hit the return key to continue entering letters. Click on 'Get Options' to get available word options."
 
 // Check if a new cache is available on page load.
@@ -269,7 +269,7 @@ function getAllCluesFromInnerHTML(){
 
 function getAllOptions(){
   getNextWord();
-  
+
   allWords = getAllWordsFromInnerHTML();
   allClues = getAllCluesFromInnerHTML();
   //console.log(allWords, allClues);
