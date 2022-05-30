@@ -23,6 +23,16 @@ kbd {
   color: black;
 }
 
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: gainsboro;
+  text-align: right;
+}
+
 .icon {
   height: 100px;
   vertical-align: middle;
@@ -77,6 +87,14 @@ kbd {
 .word-cell-selected {
   border: 3px solid red;
   background-color: lightgray;
+}
+
+.write-up{
+  background-color: lightgray;
+  color: black;
+  font-family: Garamond;
+  font-size: 1.5rem;
+  padding: 2rem 15%;
 }
 
 #heading-jumbotron {
