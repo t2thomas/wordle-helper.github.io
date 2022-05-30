@@ -15,6 +15,7 @@ window.addEventListener('load', function(event) {
 
   document.getElementById('instruction-panel').innerHTML = restingInstruction;
   createWordleCells();
+  drawKeyboard();
 });
 
 window.addEventListener('keydown', function(event) {
@@ -54,6 +55,7 @@ function isLetter(char) {
 };
 
 function handleKeystroke(char) {
+  /* This function is called by physical keyboard or virtual keyboard on a laptop, but by virtual keyboard on a mobile device */
   if ( isLetter(char) && (!endOfLineWaitingConfirmation) && (currentId<numCols*numRows) ) {
     char = char.toUpperCase();
     document.getElementById(currentId.toString()).innerText = char;
@@ -146,6 +148,7 @@ function cellStateOnClick(box) {
 };
 
 function dismissAnswersPanel(){
+  getNextWord();
   document.getElementById('answers-panel').style.display="none";
   //document.getElementById('answers-panel').classList.remove('visible');
   //document.getElementById('answers-panel').classList.add('invisible');
@@ -159,7 +162,10 @@ function getNextWord(){
     document.getElementById('next-word').disabled = true;
     document.getElementById('get-options').disabled = true;
     selectCurrentCell(currentId);
-  };
+  }
+  else{
+    document.getElementById('instruction-panel').classList.add('apply-shake');
+  }
 };
 
 function resetAll(){
