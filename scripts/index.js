@@ -5,26 +5,9 @@ let numRows = 6;
 let numCols = 5;
 let answerFileLocation = "../assets/wordle_answer_list_sorted.txt";
 
-let restingInstruction = "Complete atleast one word to be able to get your available options. Tap on letters to change colors to indicate the clues given by Wordle. "
-let awaitingConfirmationInstruction = "Tap on letters to change colors. Click on 'Next word' or hit the return key to continue entering letters. Click on 'Get Options' to get available word options."
+let restingInstruction = "Complete atleast one word to be able to get your available options. Tap on letters and cycle through colors to indicate the clues given by Wordle. "
+let awaitingConfirmationInstruction = "Tap on letters and cycle through change colors. Click on 'Next word' or hit the return key to continue entering letters. Click on 'Get Options' to get available word options."
 
-// Check if a new cache is available on page load.
-window.addEventListener('load', function(e) {
-
-  window.applicationCache.addEventListener('updateready', function(e) {
-    if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
-      // Browser downloaded a new app cache.
-      // Swap it in and reload the page to get the new hotness.
-      window.applicationCache.swapCache();
-      if (confirm('A new version of this site is available. Load it?')) {
-        window.location.reload();
-      }
-    } else {
-      // Manifest didn't changed. Nothing new to server.
-    }
-  }, false);
-
-}, false);
 
 window.addEventListener('load', function(event) {
   document.getElementById('next-word').disabled = true;
