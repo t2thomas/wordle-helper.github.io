@@ -165,7 +165,6 @@ function cellStateOnClick(box) {
 };
 
 function dismissAnswersPanel(){
-  getNextWord();
   document.getElementById('answers-panel').style.display="none";
   //document.getElementById('answers-panel').classList.remove('visible');
   //document.getElementById('answers-panel').classList.add('invisible');
@@ -269,6 +268,8 @@ function getAllCluesFromInnerHTML(){
 }
 
 function getAllOptions(){
+  getNextWord();
+  
   allWords = getAllWordsFromInnerHTML();
   allClues = getAllCluesFromInnerHTML();
   //console.log(allWords, allClues);
