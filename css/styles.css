@@ -24,6 +24,20 @@ kbd {
   color: black;
 }
 
+.below-navbar{
+  background-color: grey;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem 10%;
+  text-align: center;
+}
+
+.contact-me-form{
+  background-color: grey;
+  color: white;
+  padding: 0.5rem 10%;
+  text-align: center;
+}
 .footer {
   position: fixed;
   left: 0;
@@ -50,11 +64,6 @@ kbd {
 
 .submit-btn {
   margin: 1rem;
-}
-
-.test {
-  height: 1000px;
-  background-color: grey;
 }
 
 .word-cell {
@@ -115,7 +124,7 @@ kbd {
 }
 
 #word-entry-container {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   text-align: center;
 }
 
